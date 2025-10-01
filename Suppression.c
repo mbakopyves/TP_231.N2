@@ -1,102 +1,101 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Structure pour un nœud de la liste chaînée
-struct Node {
+// Définition de la structure d'un nœud
+typedef struct Node {
     int data;
+    struct Node* prev;
     struct Node* next;
-};
+} Node;
 
-// Fonction pour ajouter un nouvel élément à la fin de la liste
-void append(struct Node** head_ref, int new_data) {
-    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
-    struct Node* last = *head_ref;
-    new_node->data = new_data;
-    new_node->next = NULL;
+// Création d’un nouveau nœud
+Node* createNode(int data) {
+    Node* newNode = (Node*) malloc(sizeof(Node));
+    if (!newNode) {
+        printf("Erreur d’allocation mémoire\n");
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->prev = newNode->next = NULL;
+    return newNode;
+}
 
-    if (*head_ref == NULL) {
-        *head_ref = new_node;
+// Insertion en fin de liste
+void append(Node** head, int data) {
+    Node* newNode = createNode(data);
+    if (*head == NULL) {
+        *head = newNode;
         return;
     }
-
-    while (last->next != NULL) {
-        last = last->next;
-    }
-
-    last->next = new_node;
+    Node* temp = *head;
+    while (temp->next != NULL)
+        temp = temp->next;
+    temp->next = newNode;
+    newNode->prev = temp;
 }
 
-// Fonction pour supprimer toutes les occurrences d'un élément donné dans la liste
-void deleteAllOccurrences(struct Node** head_ref, int key) {
-    struct Node* temp = *head_ref;
-    struct Node* prev = NULL;
-
-    // Si la clé se trouve en tête de liste
-    while (temp != NULL && temp->data == key) {
-        *head_ref = temp->next; // Changer la tête
-        free(temp);             // Libérer l'ancienne tête
-        temp = *head_ref;       // Mettre à jour temp
-    }
-
-    // Supprimer les autres occurrences
+// Affichage de la liste
+void display(Node* head) {
+    Node* temp = head;
     while (temp != NULL) {
-        // Chercher l'élément à supprimer
-        while (temp != NULL && temp->data != key) {
-            prev = temp;
+        printf("%d <-> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+// Suppression de toutes les occurrences d'une valeur
+void deleteAllOccurrences(Node** head, int value) {
+    Node* temp = *head;
+    while (temp != NULL) {
+        if (temp->data == value) {
+            Node* toDelete = temp;
+
+            // Cas : suppression de la tête
+            if (temp->prev == NULL) {
+                *head = temp->next;
+                if (*head != NULL)
+                    (*head)->prev = NULL;
+            } 
+            // Cas : suppression au milieu ou fin
+            else {
+                temp->prev->next = temp->next;
+                if (temp->next != NULL)
+                    temp->next->prev = temp->prev;
+            }
+
+            temp = temp->next;
+            free(toDelete); // Libération mémoire
+        } else {
             temp = temp->next;
         }
-
-        // Si l'élément n'est pas présent dans la liste
-        if (temp == NULL) {
-            return;
-        }
-
-        // Déraciner le nœud
-        prev->next = temp->next;
-
-        free(temp); // Libérer la mémoire
-
-        // Mettre à jour temp pour la prochaine itération
-        temp = prev->next;
     }
 }
 
-// Fonction pour afficher la liste chaînée
-void printList(struct Node* node) {
-    while (node != NULL) {
-        printf("%d ", node->data);
-        node = node->next;
-    }
-    printf("\n");
-}
-
-// Fonction principale
+// Programme principal
 int main() {
-    struct Node* head = NULL;
-    int element_to_delete;
+    Node* head = NULL;
+    int n, val, delVal;
 
-    // Création d'une liste chaînée d'exemple
-    append(&head, 2);
-    append(&head, 4);
-    append(&head, 2);
-    append(&head, 5);
-    append(&head, 6);
-    append(&head, 2);
-    append(&head, 7);
-    append(&head, 2);
+    printf("Combien d'elements voulez-vous inserer ? ");
+    scanf("%d", &n);
 
-    printf("Liste chaînée initiale : \n");
-    printList(head);
+    for (int i = 0; i < n; i++) {
+        printf("Element %d : ", i + 1);
+        scanf("%d", &val);
+        append(&head, val);
+    }
 
-    // Lecture de l'élément à supprimer depuis l'entrée utilisateur
-    printf("Entrez l'élément à supprimer de la liste : ");
-    scanf("%d", &element_to_delete);
+    printf("\nListe initiale :\n");
+    display(head);
 
-    // Suppression de toutes les occurrences de l'élément
-    deleteAllOccurrences(&head, element_to_delete);
+    printf("\nEntrez la valeur a supprimer (toutes occurrences) : ");
+    scanf("%d", &delVal);
 
-    printf("Liste chaînée après suppression de toutes les occurrences de %d : \n", element_to_delete);
-    printList(head);
+    deleteAllOccurrences(&head, delVal);
+
+    printf("\nListe apres suppression de %d :\n", delVal);
+    display(head);
 
     return 0;
 }
