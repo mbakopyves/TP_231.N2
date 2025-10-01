@@ -1,18 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Définition de la structure d'un nœud
+// Définition d’un nœud de la liste doublement chaînée
 typedef struct Node {
     int data;
     struct Node* prev;
     struct Node* next;
 } Node;
 
-// Création d’un nouveau nœud
+// Fonction pour créer un nouveau nœud
 Node* createNode(int data) {
     Node* newNode = (Node*) malloc(sizeof(Node));
     if (!newNode) {
-        printf("Erreur d’allocation mémoire\n");
+        printf("Erreur : mémoire insuffisante.\n");
         exit(1);
     }
     newNode->data = data;
@@ -20,7 +20,7 @@ Node* createNode(int data) {
     return newNode;
 }
 
-// Insertion en fin de liste
+// Ajouter un élément à la fin de la liste
 void append(Node** head, int data) {
     Node* newNode = createNode(data);
     if (*head == NULL) {
@@ -34,30 +34,39 @@ void append(Node** head, int data) {
     newNode->prev = temp;
 }
 
-// Affichage de la liste
+// Afficher le contenu de la liste
 void display(Node* head) {
+    if (head == NULL) {
+        printf("La liste est vide.\n");
+        return;
+    }
     Node* temp = head;
+    printf("Contenu de la liste :\n");
     while (temp != NULL) {
-        printf("%d <-> ", temp->data);
+        printf(" %d ", temp->data);
+        if (temp->next != NULL) printf("<->"); 
         temp = temp->next;
     }
-    printf("NULL\n");
+    printf("\n");
 }
 
-// Suppression de toutes les occurrences d'une valeur
+// Supprimer toutes les occurrences d’une valeur donnée
 void deleteAllOccurrences(Node** head, int value) {
     Node* temp = *head;
+    int found = 0;
+
     while (temp != NULL) {
         if (temp->data == value) {
+            found = 1;
             Node* toDelete = temp;
 
-            // Cas : suppression de la tête
+            // Cas : suppression du premier élément
             if (temp->prev == NULL) {
                 *head = temp->next;
                 if (*head != NULL)
                     (*head)->prev = NULL;
             } 
-            // Cas : suppression au milieu ou fin
+            // Cas : suppression ailleurs
             else {
                 temp->prev->next = temp->next;
                 if (temp->next != NULL)
@@ -65,10 +74,25 @@ void deleteAllOccurrences(Node** head, int value) {
             }
 
             temp = temp->next;
-            free(toDelete); // Libération mémoire
+            free(toDelete);
         } else {
             temp = temp->next;
         }
+    }
+
+    if (!found) {
+        printf("La valeur %d n'existe pas dans la liste.\n", value);
+    } else {
+        printf("Toutes les occurrences de %d ont été supprimées.\n", value);
+    }
+}
+
+// Libérer toute la liste de la mémoire
+void freeList(Node* head) {
+    while (head != NULL) {
+        Node* temp = head;
+        head = head->next;
+        free(temp);
     }
 }
 
@@ -77,25 +101,32 @@ int main() {
     Node* head = NULL;
     int n, val, delVal;
 
-    printf("Combien d'elements voulez-vous inserer ? ");
+    printf("=== Gestion d’une liste doublement chaînée ===\n\n");
+
+    printf("Combien d'éléments voulez-vous ajouter ? ");
     scanf("%d", &n);
 
     for (int i = 0; i < n; i++) {
-        printf("Element %d : ", i + 1);
+        printf("Entrez l’élément %d : ", i + 1);
         scanf("%d", &val);
         append(&head, val);
     }
 
-    printf("\nListe initiale :\n");
+    printf("\n");
     display(head);
 
-    printf("\nEntrez la valeur a supprimer (toutes occurrences) : ");
+    printf("\nntrez la valeur à supprimer (toutes ses occurrences) : ");
     scanf("%d", &delVal);
 
     deleteAllOccurrences(&head, delVal);
 
-    printf("\nListe apres suppression de %d :\n", delVal);
+    printf("\n");
     display(head);
+
+    // Libération de la mémoire à la fin
+    freeList(head);
+
+    printf("\nFin du programme. La mémoire a été libérée.\n");
 
     return 0;
 }
