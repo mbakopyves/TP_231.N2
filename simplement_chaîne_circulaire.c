@@ -55,7 +55,7 @@ void printList(Node* tail) {
 }
 
 // Programme principal
-int main() {
+int simplement_chaine_circulaire() {
     Node* tail = NULL;
     int choix, valeur;
 

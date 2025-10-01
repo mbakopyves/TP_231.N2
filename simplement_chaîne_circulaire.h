@@ -1,0 +1,4 @@
+#ifndef SIMPLEMENTENT_CHAINE_CIRCULAIRE_H
+#define SIMPLEMENTENT_CHAINE_CIRCULAIRE_H
+int simplement_chaine_circulaire();
+#endif
