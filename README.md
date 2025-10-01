@@ -16,3 +16,10 @@ gcc *c main
 ```
 ## EXEMPLE DE RESULTAT (capture d'ecrant)
 ### main.c
+### 1.lire un element et suprimer toute ces occurence dans une liste douc
+### 4.insertion en tete et en queu dans une LSC-circulaire
+ici les il y'a pas de condition a donner au utilisateur tout ce qui'il on a faire est d'entrer le valeur demander et la liste sera afficher
+
+voir les resultat:
+![capture insertion en tete et en queu dans une LSC-circulaire](capture_resultat/Capture%20d’écran%20du%202025-10-01%2018-14-41.png)
+

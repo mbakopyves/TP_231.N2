@@ -1,0 +1,4 @@
+#ifndef INSERTION_ELEMENT_TRI_DANS_LDC_H
+#define INSERTION_ELEMENT_TRI_DANS_LDC_H
+int insertion_element_tri_dans_LDC();
+#endif
