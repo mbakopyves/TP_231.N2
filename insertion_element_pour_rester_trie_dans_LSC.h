@@ -1,0 +1,4 @@
+#ifndef INSERTION_POUR_RESTER_TRIE_DANS_LSC_H
+#define INSERTION_POUR_RESTER_TRIER_DANS_LSC_H
+int insertion_pour_rester_trie_dans_LSC();
+#endif
