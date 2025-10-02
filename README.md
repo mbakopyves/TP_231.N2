@@ -16,7 +16,10 @@ gcc *c main
 ```
 ## EXEMPLE DE RESULTAT (capture d'ecrant)
 ### main.c
+ici nus avons le menu en tout debut
+![capture menu](capture_resultat/Capture%20d’écran%20du%202025-10-02%2011-01-30.png)
 ### 1.lire un element et suprimer toute ces occurence dans une LSC
+
 ### 2. insertion d'un element pour quel reste trie dans une LSV025-10-01%2020-29-33.png)
 
 -pour le choix 5: afficher la liste de la queue a la tete:
@@ -46,7 +49,7 @@ voir les resultat:
 
 -pour la fin le choix 7:vider la listeo
 ![capture de choix 7](capture_resultat/Capture%20d’écran%20du%202025-10-01%2020-13-18.png)
-
+capture_resultat/Capture d’écran du 2025-10-02 11-01-30.png
 -mot d'aurevoir
 ![capture fin](capture_resultat/Capture%20d’écran%20du%202025-10-01%2020-13-30.png)
 
@@ -55,3 +58,36 @@ ici les il y'a pas de condition a donner au utilisateur tout ce qui'il on a fair
 
 voir les resultat:
 ![capture insertion en tete et en queu dans une LSC-circulaire](capture_resultat/Capture%20d’écran%20du%202025-10-01%2018-14-41.png)
+
+### 5. insertion en en-tete et en queue dans une liste doublement chainee circulaire
+voir capture resultat
+![captuture resultat](capture_resultat/Capture%20d’écran%20du%202025-10-02%2011-15-44.png)
+
+### mot de fin
+voir capture
+![capture de fin](capture_resultat/Capture%20d’écran%20du%202025-10-02%2011-01-12.png)
+
+## MEMBRE. NOM ET MATRICULE
+
+- YANKOUA MBAKOP YVES STEPHANE   24G2413
+- NDAOBA MOHAMAT 24G2687
+- TSAKOU TCHINDA GERBERT D'AURILLAC 24G2346
+- Kamwa Gatcheussi Patrice Wilfried 24G2170
+- LEKANE KOUNLAG BRIAND DURRANDE  24H2288
+- NGALEU YAMDJA GLORY 24G2640
+
+## Structure du projet
+- Un fichier source par fonctionnalité## Structure du projet
+- Un fichier source par fonctionnalité
+- Un main.c pour le menu et l’appel des fonctions
+- Un README.md pour la documentation
+
+## Remarques
+- Les images doivent être placées dans le dossier du projet ou un sous-dossier (ex : `images/`).
+- Modifie ce README pour ajouter tes propres captures et informations.
+- Un main.c pour le menu et l’appel des fonctions
+- Un README.md pour la documentation
+
+## Remarques
+- Les images doivent être placées dans le dossier du projet ou un sous-dossier (ex : `images/`).
+- Modifie ce README pour ajouter tes propres captures et informations.
